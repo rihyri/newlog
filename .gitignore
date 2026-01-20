@@ -1,0 +1,16 @@
+# Node / Vue
+node_modules/
+dist/
+.env
+
+# Spring Boot
+backend/target/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.eml
+
+# OS
+.DS_Store
