@@ -1,8 +1,6 @@
 package com.newlog.backend.service;
 
-import com.newlog.backend.dto.member.JoinRequestDto;
-import com.newlog.backend.dto.member.LoginRequestDto;
-import com.newlog.backend.dto.member.LoginResponseDto;
+import com.newlog.backend.dto.member.*;
 import com.newlog.backend.entity.Member;
 import com.newlog.backend.jwt.JwtTokenProvider;
 import com.newlog.backend.repository.MemberRepository;
@@ -82,5 +80,12 @@ public class MemberService {
     // 이메일 중복 체크
     public boolean checkEmailDuplicate(String email) {
         return memberRepository.existsByEmail(email);
+    }
+
+    // 닉네임, 이메일로 아이디 찾기
+    public IdSearchResponseDto searchId(IdSearchRequestDto dto) {
+        Member member = memberRepository.findByNicknameAndEmail(dto.getNickname(), dto.getEmail()).orElseThrow(() -> new IllegalArgumentException("닉네임, 이메일과 일치하는 아이디가 존재하지 않습니다."));
+
+        return new IdSearchResponseDto(member.getMemberId());
     }
 }

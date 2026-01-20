@@ -61,5 +61,10 @@ export const memberApi = {
     // 이메일 중복 확인
     checkEmail(email) {
         return apiClient.get(`/check-email/${email}`);
+    },
+
+    // 아이디 찾기
+    searchId(userData) {
+        return apiClient.post('/search-id', userData);
     }
 }
