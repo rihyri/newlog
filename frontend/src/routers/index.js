@@ -2,11 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/components/Home.vue';
 import Login from '@/components/member/join/Login.vue';
 import Join from '@/components/member/join/Join.vue';
-<<<<<<< HEAD
-=======
 import Id_search from '@/components/member/search/Id_search.vue';
 import Id_result from '@/components/member/search/Id_result.vue';
->>>>>>> feature/search
 
 const routes = [
     {
