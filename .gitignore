@@ -1,11 +1,18 @@
 # Node / Vue
 node_modules/
 dist/
-.env
 
 # Spring Boot
 backend/target/
 *.log
+
+# Spring Boot secrets
+backend/src/main/resources/application.properties
+backend/src/main/resources/application-*.properties
+
+# Env
+.env
+.env*
 
 # IDE
 .idea/
@@ -14,3 +21,6 @@ backend/target/
 
 # OS
 .DS_Store
+
+# Docker
+docker-compose.yml
