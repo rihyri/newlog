@@ -1,9 +1,6 @@
 package com.newlog.backend.controller.member;
 
-import com.newlog.backend.dto.member.ApiResponse;
-import com.newlog.backend.dto.member.JoinRequestDto;
-import com.newlog.backend.dto.member.LoginRequestDto;
-import com.newlog.backend.dto.member.LoginResponseDto;
+import com.newlog.backend.dto.member.*;
 import com.newlog.backend.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -62,5 +59,16 @@ public class MemberController {
         boolean isDuplicate = memberService.checkEmailDuplicate(email);
         String message = isDuplicate ? "이미 사용중인 이메일입니다." : "사용 가능한 이메일입니다.";
         return ResponseEntity.ok(ApiResponse.success(message, isDuplicate));
+    }
+
+    // 아이디 찾기 확인
+    @PostMapping("/search-id")
+    public ResponseEntity<ApiResponse<IdSearchResponseDto>> searchId(@Valid @RequestBody IdSearchRequestDto dto) {
+        try {
+            IdSearchResponseDto response = memberService.searchId(dto);
+            return ResponseEntity.ok(ApiResponse.success("아이디 찾기 성공", response));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
     }
 }
