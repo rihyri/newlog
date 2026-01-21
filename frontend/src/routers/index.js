@@ -4,6 +4,8 @@ import Login from '@/components/member/join/Login.vue';
 import Join from '@/components/member/join/Join.vue';
 import Id_search from '@/components/member/search/Id_search.vue';
 import Id_result from '@/components/member/search/Id_result.vue';
+import Pwd_search from '@/components/member/search/Pwd_search.vue';
+import Pwd_result from '@/components/member/search/Pwd_result.vue';
 
 const routes = [
     {
@@ -31,6 +33,16 @@ const routes = [
         path: '/id-result',
         name: 'Id_result',
         component: Id_result
+    },
+    {
+        path: '/pwd-search',
+        name: 'Pwd_search',
+        component: Pwd_search
+    },
+    {
+        path: '/pwd-result',
+        name: 'Pwd_result',
+        component: Pwd_result
     }
 ];
 

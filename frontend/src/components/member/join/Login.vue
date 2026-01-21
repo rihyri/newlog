@@ -28,7 +28,7 @@
             <div>
                 <router-link to="/join">회원가입</router-link>
                 <a href="/id-search">아이디 찾기</a>
-                <a href="#">비밀번호 찾기</a>
+                <a href="/pwd-search">비밀번호 재설정</a>
             </div>
         </form>
     </div>

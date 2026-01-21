@@ -36,7 +36,7 @@
             </div>
 
             <div>
-                <button type="submit" class="submit_btn">
+                <button type="submit" class="submit_btn" :disabled="isSubmitting">
                     {{ isSubmitting ? '처리중 ... ' : '아이디 찾기' }}
                 </button>
                 <button type="button" @click="$router.push('/login')">

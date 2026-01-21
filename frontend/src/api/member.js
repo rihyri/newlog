@@ -66,5 +66,14 @@ export const memberApi = {
     // 아이디 찾기
     searchId(userData) {
         return apiClient.post('/search-id', userData);
+    },
+
+    // 비밀번호 재설정 전 유저 정보 확인
+    searchPwd(userData) {
+        return apiClient.post('/search-pwd', userData);
+    },
+
+    resultPwd(userData) {
+        return apiClient.post('/result-pwd', userData);
     }
 }

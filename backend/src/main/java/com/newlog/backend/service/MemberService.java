@@ -88,4 +88,31 @@ public class MemberService {
 
         return new IdSearchResponseDto(member.getMemberId());
     }
+
+    // ID, 이메일로 유저 정보 찾기
+    public boolean checkUserByIdAndEmail(PasswordRequestDto dto) {
+        return memberRepository.findByMemberIdAndEmail(dto.getMemberId(), dto.getEmail())
+                .isPresent();
+    }
+
+    // ID 로 유저 찾기
+    public Member findByUserId(String memberId) {
+
+        return memberRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalArgumentException("ID와 일치하는 유저가 존재하지 않습니다."));
+    }
+
+    // 이메일로 전송된 텍스트로 비밀번호 변경
+    @Transactional
+    public void updateEmailPassword(String memberId, String password) {
+
+        if (password.isEmpty()) {
+            throw new IllegalArgumentException("변경할 비밀번호가 존재하지 않습니다.");
+        }
+
+        Member member = memberRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalArgumentException("ID와 일치하는 유저가 존재하지 않습니다."));
+
+        member.setMemberPw(passwordEncoder.encode(password));
+
+        memberRepository.save(member);
+    }
 }
