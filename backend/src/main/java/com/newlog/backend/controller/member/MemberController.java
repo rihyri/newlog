@@ -119,6 +119,28 @@ public class MemberController {
         return ResponseEntity.ok(ApiResponse.success("비밀번호가 이메일로 전송되었습니다.", responseData));
     }
 
+    // 마이페이지
+    @PostMapping("/mypage")
+    public ResponseEntity<ApiResponse<MyPageResponseDto>> myPage(@Valid @RequestBody MyPageRequestDto dto) {
+        try {
+            MyPageResponseDto response = memberService.myPage(dto);
+            return ResponseEntity.ok(ApiResponse.success("유저 정보 불러오기 성공", response));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
+
+    // 마이페이지 정보 수정
+    @PostMapping("/mypage-update")
+    public ResponseEntity<ApiResponse<Void>> join(@Valid @RequestBody MyPageUpdateDto dto) {
+        try {
+            memberService.myPageUpdate(dto);
+            return ResponseEntity.ok(ApiResponse.success("마이페이지 정보수정이 완료되었습니다.", null));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error(e.getMessage()));
+        }
+    }
+
     private String generateRandomPassword() {
         int length = 8;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$";

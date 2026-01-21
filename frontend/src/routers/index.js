@@ -6,13 +6,13 @@ import Id_search from '@/components/member/search/Id_search.vue';
 import Id_result from '@/components/member/search/Id_result.vue';
 import Pwd_search from '@/components/member/search/Pwd_search.vue';
 import Pwd_result from '@/components/member/search/Pwd_result.vue';
+import Mypage from '@/components/member/mypage/Mypage.vue';
 
 const routes = [
     {
         path: '/',
         name: 'Home',
         component: Home,
-        // meta: { requiresAuth : true }
     },
     {
         path: '/login',
@@ -43,6 +43,12 @@ const routes = [
         path: '/pwd-result',
         name: 'Pwd_result',
         component: Pwd_result
+    }, 
+    {
+        path: '/mypage',
+        name: 'Mypage',
+        component: Mypage,
+        meta: { requiresAuth : true }
     }
 ];
 

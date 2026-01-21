@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Pattern;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -112,6 +114,88 @@ public class MemberService {
         Member member = memberRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalArgumentException("ID와 일치하는 유저가 존재하지 않습니다."));
 
         member.setMemberPw(passwordEncoder.encode(password));
+
+        memberRepository.save(member);
+    }
+
+    // 마이페이지 정보
+    public MyPageResponseDto myPage(MyPageRequestDto dto) {
+        Member member = memberRepository.findByMemberId(dto.getMemberId()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 ID입니다."));
+
+        if (!member.getIsActive()) {
+            throw new IllegalArgumentException("비활성화된 계정입니다.");
+        }
+
+        return new MyPageResponseDto(member.getMemberId(), member.getNickname(), member.getEmail(), member.getCreatedAt());
+    }
+    
+    // 마이페이지 정보 수정
+    @Transactional
+    public void myPageUpdate(MyPageUpdateDto dto) {
+
+        String memberId = dto.getMemberId();
+
+        Member member = memberRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalArgumentException("ID와 일치하는 유저가 존재하지 않습니다."));
+
+        if (!passwordEncoder.matches(dto.getMemberPw(), member.getMemberPw())) {
+            throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
+        }
+
+        if (!dto.getNewMemberPw().trim().isEmpty() && !dto.getMemberPw().trim().isEmpty()) {
+
+            String newPw = dto.getNewMemberPw().trim();
+
+            System.out.println("타는지 확인 ===");
+            System.out.println("newPw: " + newPw);
+
+            if (newPw.length() < 8 || newPw.length() > 20) {
+                throw new IllegalArgumentException("비밀번호는 8~20자 사이여야 합니다.");
+            }
+
+            Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&^])[A-Za-z\\d@$!%*#?&^]+$");
+            if (!pattern.matcher(newPw).matches()) {
+                throw new IllegalArgumentException("비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.");
+            }
+
+            if (!newPw.equals(dto.getMemberPwChk())) {
+                throw new IllegalArgumentException("새 비밀번호가 일치하지 않습니다.");
+            }
+            member.setMemberPw(passwordEncoder.encode(newPw));
+        }
+
+        if (dto.getNickname() != null && !dto.getNickname().trim().isEmpty()) {
+
+            String nickname = dto.getNickname().trim();
+
+            if (nickname.length() < 2 || nickname.length() > 10) {
+                throw new IllegalArgumentException("닉네임은 2~10자 사이여야 합니다.");
+            }
+
+            if (!nickname.equals(member.getNickname())) {
+                if (memberRepository.existsByNickname(dto.getNickname())) {
+                    throw new IllegalArgumentException("이미 사용중인 닉네임입니다.");
+                }
+                member.setNickname(nickname);
+            }
+        }
+
+        if (dto.getEmail() != null && !dto.getEmail().trim().isEmpty()) {
+
+            String email = dto.getEmail().trim();
+
+            Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+
+            if (!emailPattern.matcher(email).matches()) {
+                throw new IllegalArgumentException("올바른 이메일 형식이 아닙니다.");
+            }
+
+            if (!email.equals(member.getEmail())) {
+                if (memberRepository.existsByEmail(dto.getEmail())) {
+                    throw new IllegalArgumentException("이미 사용중인 이메일입니다.");
+                }
+                member.setEmail(email);
+            }
+        }
 
         memberRepository.save(member);
     }

@@ -73,7 +73,18 @@ export const memberApi = {
         return apiClient.post('/search-pwd', userData);
     },
 
+    // 비밀번호 재설정 후 화면
     resultPwd(userData) {
         return apiClient.post('/result-pwd', userData);
+    },
+
+    // 마이페이지
+    mypage(memberId) {
+        return apiClient.post('/mypage', memberId);
+    },
+
+    // 마이페이지 업데이트
+    mypageUpdate(userData) {
+        return apiClient.post('/mypage-update', userData);
     }
 }

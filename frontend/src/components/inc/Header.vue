@@ -11,7 +11,7 @@
                 <div v-if="isLoggedIn">
                     <span>{{  nickname  }}님 환영합니다!</span>
                     <li>
-                        <a href="/">마이페이지</a>
+                        <a href="/mypage">마이페이지</a>
                     </li>
                     <li>
                         <a @click="handleLogout">로그아웃</a>
