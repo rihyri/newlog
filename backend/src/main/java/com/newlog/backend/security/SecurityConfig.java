@@ -37,10 +37,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/member/register").permitAll()
                         .requestMatchers("/api/member/login").permitAll()
-                        .requestMatchers("/api/member/check-id").permitAll()
-                        .requestMatchers("/api/member/check-nickname").permitAll()
+                        .requestMatchers("/api/member/check-id/**").permitAll()
+                        .requestMatchers("/api/member/check-nickname/**").permitAll()
+                        .requestMatchers("/api/member/check-email/**").permitAll()
                         .requestMatchers("/api/member/search-id").permitAll()
                         .requestMatchers("/api/member/search-pwd").permitAll()
                         .requestMatchers("/api/member/mypage", "/api/member/mypage-update").authenticated()
