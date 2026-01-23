@@ -43,7 +43,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/member/check-email/**").permitAll()
                         .requestMatchers("/api/member/search-id").permitAll()
                         .requestMatchers("/api/member/search-pwd").permitAll()
-                        .requestMatchers("/api/member/mypage", "/api/member/mypage-update").authenticated()
+                        .requestMatchers("/api/member/mypage", "/api/member/mypage-update", "/api/news/**")
+                        .authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
@@ -52,6 +53,38 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    /*
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/member/login",
+                                "/api/member/check-id/**",
+                                "/api/member/check-nickname/**",
+                                "/api/member/check-email/**",
+                                "/api/member/search-id",
+                                "/api/member/search-pwd",
+                                "/api/news/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                "/api/member/mypage",
+                                "/api/member/mypage-update"
+                        ).authenticated()
+
+                        .anyRequest().authenticated()
+                );
+
+        return http.build();
+    }
+     */
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

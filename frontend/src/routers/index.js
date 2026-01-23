@@ -7,6 +7,7 @@ import Id_result from '@/components/member/search/Id_result.vue';
 import Pwd_search from '@/components/member/search/Pwd_search.vue';
 import Pwd_result from '@/components/member/search/Pwd_result.vue';
 import Mypage from '@/components/member/mypage/Mypage.vue';
+import NewsList from '@/components/news/NewsList.vue';
 
 const routes = [
     {
@@ -49,6 +50,12 @@ const routes = [
         name: 'Mypage',
         component: Mypage,
         meta: { requiresAuth : true }
+    }, 
+    {
+        path: '/news-list',
+        name: 'NewsList',
+        component: NewsList,
+        mata: { requiresAuth : true }
     }
 ];
 

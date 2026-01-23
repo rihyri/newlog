@@ -1,6 +1,6 @@
-package com.newlog.backend.repository;
+package com.newlog.backend.repository.member;
 
-import com.newlog.backend.entity.Member;
+import com.newlog.backend.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

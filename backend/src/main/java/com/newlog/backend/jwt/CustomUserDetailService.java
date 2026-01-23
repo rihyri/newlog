@@ -1,7 +1,7 @@
 package com.newlog.backend.jwt;
 
-import com.newlog.backend.entity.Member;
-import com.newlog.backend.repository.MemberRepository;
+import com.newlog.backend.entity.member.Member;
+import com.newlog.backend.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

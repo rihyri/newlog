@@ -1,10 +1,10 @@
 package com.newlog.backend.controller.member;
 
-import com.newlog.backend.controller.mail.MailService;
+import com.newlog.backend.service.mail.MailService;
 import com.newlog.backend.dto.mail.PasswordMailDto;
 import com.newlog.backend.dto.member.*;
-import com.newlog.backend.entity.Member;
-import com.newlog.backend.service.MemberService;
+import com.newlog.backend.entity.member.Member;
+import com.newlog.backend.service.member.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.SecureRandom;
 import java.util.Map;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api/member")

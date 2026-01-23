@@ -6,6 +6,7 @@
         <div>
             <ul>
                 <li><a href="/">홈</a></li>
+                <li><a href="/news-list">뉴스</a></li>
                 
                 <!-- 로그인 -->
                 <div v-if="isLoggedIn">

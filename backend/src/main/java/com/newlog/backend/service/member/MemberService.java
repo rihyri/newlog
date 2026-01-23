@@ -1,9 +1,9 @@
-package com.newlog.backend.service;
+package com.newlog.backend.service.member;
 
 import com.newlog.backend.dto.member.*;
-import com.newlog.backend.entity.Member;
+import com.newlog.backend.entity.member.Member;
 import com.newlog.backend.jwt.JwtTokenProvider;
-import com.newlog.backend.repository.MemberRepository;
+import com.newlog.backend.repository.member.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;

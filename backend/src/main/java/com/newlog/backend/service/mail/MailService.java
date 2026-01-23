@@ -1,4 +1,4 @@
-package com.newlog.backend.controller.mail;
+package com.newlog.backend.service.mail;
 
 import com.newlog.backend.dto.mail.PasswordMailDto;
 import jakarta.mail.MessagingException;
