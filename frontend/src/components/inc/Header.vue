@@ -1,33 +1,28 @@
 <template>
     <header>
-        <div>
-            <h1>NEWSLOG</h1>
+        <div class="header-img">
+            <img src="../../img/newslog_logo.png" alt="로고">
         </div>
         <div>
             <ul>
-                <li><a href="/">홈</a></li>
-                <li><a href="/news-list">뉴스</a></li>
+                <li class="sub-li"><a href="/">홈</a></li>
+                <li class="sub-li"><a href="/news-list">뉴스</a></li>
                 
                 <!-- 로그인 -->
-                <div v-if="isLoggedIn">
-                    <span>{{  nickname  }}님 환영합니다!</span>
-                    <li>
-                        <a href="/mypage">마이페이지</a>
-                    </li>
-                    <li>
-                        <a @click="handleLogout">로그아웃</a>
-                    </li>
-                </div>
-
+                <!-- <span>{{  nickname  }}님 환영합니다!</span> -->
+                <li class="member-li" v-if="isLoggedIn">
+                    <a href="/mypage">마이페이지</a>
+                </li>
+                <li class="member-li" v-if="isLoggedIn">
+                    <a @click="handleLogout">로그아웃</a>
+                </li>
                 <!-- 로그아웃 -->
-                <div v-else>
-                    <li>
-                        <a href="/login">로그인</a>
-                    </li>
-                    <li>
-                        <a href="/join">회원가입</a>
-                    </li>
-                </div>
+                <li class="member-li" v-if="!isLoggedIn">
+                    <a href="/login">로그인</a>
+                </li>
+                <li class="member-li" v-if="!isLoggedIn">
+                    <a href="/join">회원가입</a>
+                </li>
             </ul>
         </div>
     </header>
