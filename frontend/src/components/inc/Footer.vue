@@ -13,7 +13,7 @@
             <div class="notice_menu">
                 <ul>
                     <li><a href="">이용약관</a></li>
-                    <li><a hrer="">개인정보처리방침</a></li>
+                    <li><a href="">개인정보처리방침</a></li>
                     <li><a href="">서비스소개</a></li>
                 </ul>
             </div>

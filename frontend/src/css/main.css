@@ -467,3 +467,79 @@ hr {
    border: none;
    border-radius: 5px;
 }
+
+.mypage_wrap {
+   text-align: center;
+}
+
+.mypage_wrap h2 {
+   margin: 3vw 0 !important;
+}
+
+.mypage_wrap form table {
+   width: 100%;
+   border: 1px solid #ddd;
+   border-collapse: collapse;
+   font-size: 0.8rem;
+   margin-top: 5vw;
+}
+
+.mypage_wrap form table tr, .mypage_wrap form table td {
+   padding: 1vw 0;
+   border: 1px solid #ddd;
+}
+
+.mypage_wrap form table td:nth-child(1) {
+   background-color: #eee;
+}
+
+
+.mypage_wrap table input {
+   width: 50%;
+   height: 1.8vw;
+   padding-left: 1vw;
+   border: 1px solid #ccc;
+}
+
+.mypage_wrap table .email_td input {
+   width: 20% !important;
+}
+
+.mypage_wrap table .email_td select {
+   width: 15%;
+   height: 2vw;
+   margin-left: 1vw;
+   padding-left: 1vw;
+   border: 1px solid #ccc;
+}
+
+.mypage_wrap table button {
+   height: 2vw;
+   width: 10vw;
+   background-color: #4988C4;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   margin-left: 1vw;
+}
+
+.mypage_wrap table button:disabled {
+   background-color: #547792;
+   color: #ddd;
+}
+
+.mypage_wrap .submit-btn {
+   margin-left: 0 !important;
+}
+
+.mypage_wrap .btn-div button {
+   height: 2.5vw;
+   width: 15vw;
+   background-color: #4988C4;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   margin-left: 1vw;
+   margin-top: 5vw;
+   font-size: 1.1rem;
+}

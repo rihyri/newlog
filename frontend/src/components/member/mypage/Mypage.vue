@@ -1,120 +1,120 @@
 <template>
-    <div>
-        <h2>마이페이지</h2>
-
-        <form @submit.prevent="mypageUpdate">
-            <table>
-                <tbody>
-                    <tr>
-                        <td>유저 ID</td>
-                        <td>{{ memberId }}</td>
-                    </tr>
-                    <tr>
-                        <td>현재 비밀번호</td>
-                        <td>
-                            <input type="password" id="member_pw"
-                                v-model="formData.memberPw"
-                                :class="{ 'error' : errors.memberPw && showErrors }"
-                                @blur="onFieldBlur('memberPw')"
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>새로운 비밀번호</td>
-                        <td>
-                            <input type="password" id="new_member_pw"
-                                v-model="formData.newMemberPw"
-                                :class="{ 'error' : errors.newMemberPw && showErrors }"
-                                @blur="onFieldBlur('newMemberPw')"
-                            />
-                            <span class="error-message" v-if="errors.memberPw && showErrors">{{ errors.memberPw }}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>새로운 비밀번호 확인</td>
-                        <td>
-                            <input type="password" id="member_pw_chk"
-                                v-model="formData.memberPwChk"
-                                :class="{ 'error': errors.memberPwChk && showErrors }"
-                                @blur="onFieldBlur('memberPwChk')"
-                            />
-                            <span class="error-message" v-if="errors.memberPwChk && showErrors">
-                                {{ errors.memberPwChk }}
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>닉네임</td>
-                        <td>
-                            <input type="text" id="nickname"
-                                value="userData.nickname"
-                                :class="{ 'error': errors.nickname && showErrors }"
-                                v-model="formData.nickname"
-                            />
-                            <button type="button" @click="checkNicknameDuplicate"
-                                :disabled="!formData.nickname"
-                            >
-                                닉네임 중복 확인
-                            </button>
-                            <span class="error-message" v-if="errors.nickname && showErrors">{{ errors.nickname }}</span>
-                            <span class="success-message" v-if="nicknameChecked">
-                                {{ nicknameCheckMessage }}
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>이메일</td>
-                        <td>
-                            <input type="text" id="email1"
-                                v-model="email.local"
-                            />
-                            @
-                            <input type="text" id="email2"
-                                v-model="email.domain"
-                                :readonly="email.domainReadOnly"
-                            />
-                            <select v-model="email.selected" @change="handleEmailDomainChange">
-                                <option value="hanmail.net">hanmail.net</option>
-                                <option value="naver.com">naver.com</option>
-                                <option value="daum.net">daum.net</option>
-                                <option value="nate.com">nate.com</option>
-                                <option value="gmail.com">gmail.com</option>
-                                <option value="korea.com">korea.com</option>
-                                <option value="dreamwiz.com">dreamwiz.com</option>
-                                <option value="hotmail.com">hotmail.com</option>
-                                <option value="yahoo.co.kr">yahoo.co.kr</option>
-                                <option value="sportal.or.kr">sportal.or.kr</option>
-                                <option value="" selected>직접입력</option>
-                            </select>
-                            <button type="button" @click="checkEmailDuplicate"
-                                :disabled="!email.local || !email.domain"
-                            >
-                                이메일 중복 확인
-                            </button>
-                            <span class="error-message" v-if="errors.email && showErrors">
-                                {{ errors.email }}
-                            </span>
-                            <span class="success-message" v-if="emailChecked">
-                                {{ emailCheckMessage }}
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>가입일</td>
-                        <td>
-                            {{ formatDate(userData.createdAt) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="submit" class="submit-btn" :disabled="isSubmitting">
-                                {{ isSubmitting ? '처리중...' : '수정하기' }}
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+    <div class="title_wrap">
+        <div class="mypage_wrap">
+            <h2>마이페이지</h2>
+            <hr />
+            <form @submit.prevent="mypageUpdate">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>유저 ID</td>
+                            <td>{{ memberId }}</td>
+                        </tr>
+                        <tr>
+                            <td>현재 비밀번호</td>
+                            <td>
+                                <input type="password" id="member_pw"
+                                    v-model="formData.memberPw"
+                                    :class="{ 'error' : errors.memberPw && showErrors }"
+                                    @blur="onFieldBlur('memberPw')"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>새로운 비밀번호</td>
+                            <td>
+                                <span class="error-message" v-if="errors.memberPw && showErrors">{{ errors.memberPw }}</span>
+                                <input type="password" id="new_member_pw"
+                                    v-model="formData.newMemberPw"
+                                    :class="{ 'error' : errors.newMemberPw && showErrors }"
+                                    @blur="onFieldBlur('newMemberPw')"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>새로운 비밀번호 확인</td>
+                            <td>
+                                <span class="error-message" v-if="errors.memberPwChk && showErrors">
+                                    {{ errors.memberPwChk }}
+                                </span>
+                                <input type="password" id="member_pw_chk"
+                                    v-model="formData.memberPwChk"
+                                    :class="{ 'error': errors.memberPwChk && showErrors }"
+                                    @blur="onFieldBlur('memberPwChk')"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>닉네임</td>
+                            <td>
+                                <span class="error-message" v-if="errors.nickname && showErrors">{{ errors.nickname }}</span>
+                                <span class="success-message" v-if="nicknameChecked">
+                                    {{ nicknameCheckMessage }}
+                                </span>
+                                <input type="text" id="nickname"
+                                    value="userData.nickname"
+                                    :class="{ 'error': errors.nickname && showErrors }"
+                                    v-model="formData.nickname"
+                                />
+                                <button type="button" @click="checkNicknameDuplicate"
+                                    :disabled="!formData.nickname"
+                                >
+                                    닉네임 중복 확인
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>이메일</td>
+                            <td class="email_td">
+                                <span class="error-message" v-if="errors.email && showErrors">
+                                    {{ errors.email }}
+                                </span>
+                                <span class="success-message" v-if="emailChecked">
+                                    {{ emailCheckMessage }}
+                                </span>
+                                <input type="text" id="email1"
+                                    v-model="email.local"
+                                />
+                                @
+                                <input type="text" id="email2"
+                                    v-model="email.domain"
+                                    :readonly="email.domainReadOnly"
+                                />
+                                <select v-model="email.selected" @change="handleEmailDomainChange">
+                                    <option value="hanmail.net">hanmail.net</option>
+                                    <option value="naver.com">naver.com</option>
+                                    <option value="daum.net">daum.net</option>
+                                    <option value="nate.com">nate.com</option>
+                                    <option value="gmail.com">gmail.com</option>
+                                    <option value="korea.com">korea.com</option>
+                                    <option value="dreamwiz.com">dreamwiz.com</option>
+                                    <option value="hotmail.com">hotmail.com</option>
+                                    <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                    <option value="sportal.or.kr">sportal.or.kr</option>
+                                    <option value="" selected>직접입력</option>
+                                </select>
+                                <button type="button" @click="checkEmailDuplicate"
+                                    :disabled="!email.local || !email.domain"
+                                >
+                                    이메일 중복 확인
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>가입일</td>
+                            <td>
+                                {{ formatDate(userData.createdAt) }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-div">
+                    <button type="submit" class="submit-btn" :disabled="isSubmitting">
+                        {{ isSubmitting ? '처리중...' : '수정하기' }}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 
