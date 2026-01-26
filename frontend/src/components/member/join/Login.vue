@@ -7,7 +7,7 @@
             <h2>로그인</h2>
             <form class="login_form" @submit.prevent="handleLogin">
                 <div class="login_div">
-                    <span class="login-error" v-if="errors.memberId">* {{ errors.memberId }}</span>
+                    <span class="error-message" v-if="errors.memberId">* {{ errors.memberId }}</span>
                     <input type="text" id="member_id" class="login_input"
                         v-model="loginData.memberId"
                         placeholder="아이디를 입력하세요."
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="login_div">
-                    <span class="login-error" v-if="errors.memberPw">* {{ errors.memberPw }}</span>
+                    <span class="error-message" v-if="errors.memberPw">* {{ errors.memberPw }}</span>
                     <input
                         type="password" id="member_pw" v-model="loginData.memberPw" class="login_input"
                         placeholder="비밀번호를 입력하세요"
