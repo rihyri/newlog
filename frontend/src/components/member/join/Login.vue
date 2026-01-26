@@ -1,36 +1,44 @@
 <template>
-    <div>
-        <form @submit.prevent="handleLogin">
-            <div>
-                <label for="member_id">아이디</label>
-                <input type="text" id="member_id"
-                    v-model="loginData.memberId"
-                    placeholder="아이디를 입력하세요."
-                    :class="{ 'error': errors.memberId }"
-                />
-                <span class="error-message" v-if="errors.memberId">{{ errors.memberId }}</span>
+    <div class="title_wrap">
+        <div class="login_wrap">
+                <div class="logo_img">
+                <img src="../../../img/newslog_logo.png" alt="로고">
             </div>
+            <h2>로그인</h2>
+            <form class="login_form" @submit.prevent="handleLogin">
+                <div class="login_div">
+                    <span class="login-error" v-if="errors.memberId">* {{ errors.memberId }}</span>
+                    <input type="text" id="member_id" class="login_input"
+                        v-model="loginData.memberId"
+                        placeholder="아이디를 입력하세요."
+                        :class="{ 'error': errors.memberId }"
+                    />
+                </div>
 
-            <div>
-                <label for="member_pw">비밀번호</label>
-                <input
-                    type="password" id="member_pw" v-model="loginData.memberPw"
-                    placeholder="비밀번호를 입력하세요"
-                    :class="{ 'error': errors.memberPw }"
-                />
-                <span class="error-message" v-if="errors.memberPw">{{ errors.memberPw }}</span>
-            </div>
+                <div class="login_div">
+                    <span class="login-error" v-if="errors.memberPw">* {{ errors.memberPw }}</span>
+                    <input
+                        type="password" id="member_pw" v-model="loginData.memberPw" class="login_input"
+                        placeholder="비밀번호를 입력하세요"
+                        :class="{ 'error': errors.memberPw }"
+                    />
+                </div>
 
-            <button type="submit" class="login-btn" :disabled="isLoading">
-                {{ isLoading ? '로그인중...' : '로그인' }}
-            </button>
+                <div class="pwd_btn"><a href="/pwd-search">비밀번호 재설정</a></div>
 
-            <div>
-                <router-link to="/join">회원가입</router-link>
-                <a href="/id-search">아이디 찾기</a>
-                <a href="/pwd-search">비밀번호 재설정</a>
-            </div>
-        </form>
+                <div class="btn_div">
+                    <button type="submit" class="login-btn" :disabled="isLoading">
+                        {{ isLoading ? '로그인중...' : '로그인' }}
+                    </button>
+                </div>
+
+                <div class="login_search">
+                    <div class="search_btn"><router-link to="/join">회원가입</router-link></div>
+                    <span>|</span>
+                    <div class="search_btn"><a href="/id-search">아이디 찾기</a></div>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 

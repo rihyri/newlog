@@ -1,11 +1,13 @@
 <template>
     <header>
         <div class="header-img">
-            <img src="../../img/newslog_logo.png" alt="로고">
+            <a href="/">
+                <img src="../../img/newslog_logo.png" alt="로고">
+            </a>
         </div>
-        <div>
+        <div class="main-menu">
             <ul>
-                <li class="sub-li"><a href="/">홈</a></li>
+                <li class="sub-li"><a href="/">메인화면</a></li>
                 <li class="sub-li"><a href="/news-list">뉴스</a></li>
                 
                 <!-- 로그인 -->
