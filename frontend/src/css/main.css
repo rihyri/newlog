@@ -33,7 +33,7 @@ header a {
 }
 
 .header-img {
-   width: 10vw;
+   width: 5vw;
 }
 
 header ul {
@@ -103,7 +103,7 @@ footer .contact_info {
 }
 
 footer .contact_info .footer_img {
-   width: 7vw;
+   width: 4vw;
    margin-bottom: 0.8vw;
 }
 
@@ -140,7 +140,7 @@ footer .notice_menu ul li a {
 }
 
 .login_wrap .logo_img {
-   width: 12vw;;
+   width: 9vw;;
 }
 
 .login_wrap h2 {
