@@ -105,6 +105,7 @@ public class NewsService {
             }
         } else {
             log.info("캐시된 전체 뉴스 사용 ({}개)", recentNewsCount);
+            cleanupOldNews(null);
         }
 
         Pageable pageable = PageRequest.of(page, size);
@@ -134,6 +135,7 @@ public class NewsService {
             }
         } else {
             log.info("캐시된 {} 뉴스 사용 ({}개)", categoryName, recentNewsCount);
+            cleanupOldNews(category);
         }
 
         Pageable pageable = PageRequest.of(page, size);

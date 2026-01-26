@@ -8,6 +8,7 @@ import Pwd_search from '@/components/member/search/Pwd_search.vue';
 import Pwd_result from '@/components/member/search/Pwd_result.vue';
 import Mypage from '@/components/member/mypage/Mypage.vue';
 import NewsList from '@/components/news/NewsList.vue';
+import NewsView from '@/components/news/NewsView.vue';
 
 const routes = [
     {
@@ -56,6 +57,12 @@ const routes = [
         name: 'NewsList',
         component: NewsList,
         mata: { requiresAuth : true }
+    },
+    {
+        path: '/news-view/:id',
+        name: 'NewsView',
+        component: NewsView,
+        meata: { requiresAuth : true }
     }
 ];
 
@@ -74,5 +81,21 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
+
+router.beforeEach((to, _, next) => {
+    const accessToken = localStorage.getItem("accessToken");
+    const memberId = localStorage.getItem("memberId");
+    const nickname = localStorage.getItem('nickname');
+
+    const isAuthenticated = Boolean(accessToken && memberId && nickname);
+    
+    if (!isAuthenticated && to.name !== "Login" && to.name !== "Join" && to.name !== "Home") {
+        return next({ name: "Login" });
+    } else if (isAuthenticated && (to.name === "Login" || to.name === "Join")) {
+        return next({ name: "Home" });
+    } else {
+        return next();
+    }
+});
 
 export default router;

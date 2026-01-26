@@ -5,27 +5,31 @@
                 <img src="../../img/newslog_logo.png" alt="로고">
             </a>
         </div>
-        <div class="main-menu">
-            <ul>
-                <li class="sub-li"><a href="/">메인화면</a></li>
-                <li class="sub-li"><a href="/news-list">뉴스</a></li>
-                
-                <!-- 로그인 -->
-                <!-- <span>{{  nickname  }}님 환영합니다!</span> -->
-                <li class="member-li" v-if="isLoggedIn">
-                    <a href="/mypage">마이페이지</a>
-                </li>
-                <li class="member-li" v-if="isLoggedIn">
-                    <a @click="handleLogout">로그아웃</a>
-                </li>
-                <!-- 로그아웃 -->
-                <li class="member-li" v-if="!isLoggedIn">
-                    <a href="/login">로그인</a>
-                </li>
-                <li class="member-li" v-if="!isLoggedIn">
-                    <a href="/join">회원가입</a>
-                </li>
-            </ul>
+        <div class="header_wrap">
+            <span class="welcome_txt" v-if="isLoggedIn">
+                {{  nickname  }}님 환영합니다! <i class="fa-solid fa-dove"></i>
+            </span>
+            <div class="main-menu">
+                <ul>
+                    <li class="sub-li"><a href="/">메인화면</a></li>
+                    <li class="sub-li"><a href="/news-list">뉴스</a></li>
+                    
+                    <!-- 로그인 -->
+                    <li class="member-li" v-if="isLoggedIn">
+                        <a href="/mypage">마이페이지</a>
+                    </li>
+                    <li class="member-li" v-if="isLoggedIn">
+                        <a @click="handleLogout">로그아웃</a>
+                    </li>
+                    <!-- 로그아웃 -->
+                    <li class="member-li" v-if="!isLoggedIn">
+                        <a href="/login">로그인</a>
+                    </li>
+                    <li class="member-li" v-if="!isLoggedIn">
+                        <a href="/join">회원가입</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
 </template>
