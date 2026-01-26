@@ -1,49 +1,56 @@
 <template>
-    <div>
-        <form @submit.prevent="searchId">
-            <div>
-                <label for="nickname">닉네임</label>
-                <input type="text" id="nickname"
-                    v-model="searchData.nickname"
-                    placeholder="닉네임을 입력해주세요."
-                />
-            </div>
+    <div class="title_wrap">
+        <div class="id_search_form">
+            <h2>아이디 찾기</h2>
+            <hr />
+            <form @submit.prevent="searchId">
+                <div class="input_wrap">
+                    <label for="nickname">닉네임</label>
+                    <input type="text" id="nickname"
+                        v-model="searchData.nickname"
+                        placeholder="닉네임을 입력해주세요."
+                    />
+                </div>
 
-            <div>
-                <label for="email">이메일</label>
-                <input type="text" id="email_local"
-                    v-model="email.local"
-                    placeholder="이메일을 입력해주세요."
-                />
-                <input type="text" id="email_domain"
-                    v-model="email.domain"
-                    :readonly="email.domainReadOnly"
-                    placeholder="이메일 주소"
-                />
-                <select v-model="email.selected" @change="handleEmailDomainChange">
-                    <option value="hanmail.net">hanmail.net</option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="daum.net">daum.net</option>
-                    <option value="nate.com">nate.com</option>
-                    <option value="gmail.com">gmail.com</option>
-                    <option value="korea.com">korea.com</option>
-                    <option value="dreamwiz.com">dreamwiz.com</option>
-                    <option value="hotmail.com">hotmail.com</option>
-                    <option value="yahoo.co.kr">yahoo.co.kr</option>
-                    <option value="sportal.or.kr">sportal.or.kr</option>
-                    <option value="" selected>직접입력</option>
-                </select>
-            </div>
+                <div class="email_wrap">
+                    <label for="email">이메일</label>
+                    <div class="email_select">
+                        <input type="text" id="email_local"
+                        v-model="email.local"
+                        placeholder="이메일"
+                        />
+                        @
+                        <input type="text" id="email_domain"
+                            v-model="email.domain"
+                            :readonly="email.domainReadOnly"
+                            placeholder="이메일 주소"
+                        />
+                        <select v-model="email.selected" @change="handleEmailDomainChange">
+                            <option value="hanmail.net">hanmail.net</option>
+                            <option value="naver.com">naver.com</option>
+                            <option value="daum.net">daum.net</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value="gmail.com">gmail.com</option>
+                            <option value="korea.com">korea.com</option>
+                            <option value="dreamwiz.com">dreamwiz.com</option>
+                            <option value="hotmail.com">hotmail.com</option>
+                            <option value="yahoo.co.kr">yahoo.co.kr</option>
+                            <option value="sportal.or.kr">sportal.or.kr</option>
+                            <option value="" selected>직접입력</option>
+                        </select>
+                    </div>
+                </div>
 
-            <div>
-                <button type="submit" class="submit_btn" :disabled="isSubmitting">
-                    {{ isSubmitting ? '처리중 ... ' : '아이디 찾기' }}
-                </button>
-                <button type="button" @click="$router.push('/login')">
-                    취소
-                </button>
-            </div>
-        </form>
+                <div class="btn-div">
+                    <button type="submit" class="submit_btn" :disabled="isSubmitting">
+                        {{ isSubmitting ? '처리중 ... ' : '아이디 찾기' }}
+                    </button>
+                    <button type="button" class="cancel-btn" @click="$router.push('/login')">
+                        취소
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 

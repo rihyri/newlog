@@ -1,7 +1,29 @@
+@font-face {
+    font-family: 'NexonLv1Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NexonLv1Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'NexonLv1Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
+
 * {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   font-family: 'NexonLv1Gothic';
 }
 
 a {
@@ -69,6 +91,7 @@ header li a {
 
 header .sub-li {
    background-color: #BDE8F5;
+   border: 2px solid #BDE8F5;
 }
 
 header .sub-li a {
@@ -242,7 +265,7 @@ footer .notice_menu ul li a {
    margin: 0 5px;
 }
 
-.join_wrap hr {
+hr {
    width: 100%;
    height: 3px;
    background-color: #222;
@@ -318,4 +341,129 @@ footer .notice_menu ul li a {
 
 .join_wrap .btn-div .cancel-btn {
    width: 7vw;
+}
+
+.id_search_form {
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+}
+
+.id_search_form h2 {
+   margin-bottom: 2vw;
+}
+
+.id_search_form form {
+   width: 40vw;
+   margin-top: 1vw;
+}
+
+.id_search_form .input_wrap, .id_search_form .email_wrap {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1vw;
+}
+
+.id_search_form .input_wrap input, .id_search_form .email_wrap input {
+   height: 2vw;
+   border: 1px solid #ccc;
+}
+
+.id_search_form .input_wrap input {
+   width: 80%;
+   padding-left: 1vw;
+}
+
+.id_search_form .email_wrap input {
+   width: 10vw;
+   padding-left: 1vw;
+   margin-right: 5px;
+}
+
+.id_search_form .email_wrap input:nth-child(2) {
+   margin-left: 5px;;
+}
+
+.id_search_form .email_wrap select {
+   width: 10vw;
+   display: block;
+   margin-left: 5px;
+   padding-left: 1vw;
+   border: 1px solid #ccc;
+}
+
+.id_search_form .email_wrap .email_select {
+   display: flex;
+}
+
+.id_search_form .join_input button {
+   height: 2vw;
+   background-color: #4988C4;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+}
+
+.id_search_form .join_input button:disabled {
+   background-color: #547792;
+   color: #ddd;
+}
+
+.id_search_form .btn-div {
+   display: flex;
+   justify-content: center;
+   margin-top: 6vw;
+}
+
+.id_search_form .btn-div button {
+   height: 2.5vw;
+   font-size: 1.1rem;
+   border: none;
+   border-radius: 5px;
+}
+
+.id_search_form .btn-div .submit_btn  {
+   width: 10vw;
+   margin-right: 2vw;
+   background-color: #4988C4;
+   color: #fff;
+}
+
+.id_search_form .cancel-btn {
+   width: 7vw;
+}
+
+.id_result {
+   display: flex;
+   align-items: center;
+   flex-flow: column;
+   height: 20vw;
+   justify-content: center;
+   text-align: center;
+}
+
+.id_result .result_div {
+   width: 100%;
+}
+
+.id_result .result_div h2 {
+   font-size: 1.8rem;
+   margin-bottom: 1vw;
+}
+
+.id_result .result_div p {
+   font-size: 1.2rem;
+   margin: 5vw 0;
+}
+
+.id_result .result_div button {
+   width: 10vw;
+   background-color: #4988C4;
+   color: #fff;
+   height: 2.5vw;
+   font-size: 1.1rem;
+   border: none;
+   border-radius: 5px;
 }
