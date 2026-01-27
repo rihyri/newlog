@@ -53,4 +53,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             "ORDER BY n2.createdAt ASC)")
     void deleteOldestCategoryNews(@Param("category") NewsCategory category, @Param("limit") int limit);
 
+    Optional<News> findByNewsNo (Long news_no);
+
 }

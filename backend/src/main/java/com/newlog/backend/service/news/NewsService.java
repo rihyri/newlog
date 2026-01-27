@@ -2,6 +2,7 @@ package com.newlog.backend.service.news;
 
 import com.newlog.backend.dto.member.ApiResponse;
 import com.newlog.backend.dto.news.NewsDto;
+import com.newlog.backend.dto.news.NewsViewRequestDto;
 import com.newlog.backend.entity.news.News;
 import com.newlog.backend.entity.news.NewsCategory;
 import com.newlog.backend.repository.news.NaverNewsApiResponse;
@@ -265,5 +266,12 @@ public class NewsService {
                 .viewCount(news.getViewCount())
                 .likeCount(news.getLikeCount())
                 .build();
+    }
+
+    /* 뉴스 상세페이지 */
+    public NewsDto newsView(Long newsNo) {
+        News news = newsRepository.findByNewsNo(newsNo).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 뉴스 넘버입니다."));
+
+        return convertToDto(news);
     }
 }

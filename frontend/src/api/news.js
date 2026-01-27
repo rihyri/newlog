@@ -45,9 +45,14 @@ export const newsApi = {
     },
 
     // 카테고리별 뉴스 목록
-    newsByCategory(category, page = 0, size = 10) {
-        return apiClient.get(`/category/${category}`, {
-            params: { page, size }
+    newsByCategory(categoryName, page = 0, size = 10) {
+        return apiClient.get(`/category`, {
+            params: { name: categoryName, page, size }
         });
+    },
+
+    // 뉴스 상세보기
+    newsView(newsNo) {
+        return apiClient.get(`/view/${newsNo}`);
     }
 }

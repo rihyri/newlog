@@ -36,17 +36,19 @@
                     v-for="news in newsList"
                     :key="news.newsNo"
                 >
-                    <div v-if="news.categoryDisplayName">
-                        {{ news.categoryDisplayName }}
-                    </div>
-                    <h3>{{ news.title }}</h3> 
-                    <p>{{ news.description }}</p>
-                    <div>
-                        <span>{{  formatDate(news.pubDate) }}</span>
-                        <span>
-                            👁️ {{ news.viewCount }} | ❤️ {{ news.likeCount }}
-                        </span>
-                    </div>
+                    <router-link :to="{ name: 'NewsView', params: {id: news.newsNo}}">
+                        <div v-if="news.categoryDisplayName">
+                            {{ news.categoryDisplayName }}
+                        </div>
+                        <h3>{{ news.title }}</h3> 
+                        <p>{{ truncateText(news.description, 30) }}</p>
+                        <div>
+                            <span>{{  formatDate(news.pubDate) }}</span>
+                            <span>
+                                👁️ {{ news.viewCount }} | ❤️ {{ news.likeCount }}
+                            </span>
+                        </div>
+                    </router-link>
                 </div>
             </div>
 
@@ -71,6 +73,7 @@
 <script>
     import { newsApi } from '@/api/news';
     import { ref, onMounted } from 'vue';
+    import { truncateText } from '@/utils/stringUtil';
 
     export default {
         name: 'NewsList',
@@ -149,6 +152,7 @@
                 totalPages,
                 selectCategory,
                 loadPage,
+                truncateText,
                 formatDate
             };
         }

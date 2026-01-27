@@ -4,6 +4,7 @@
             <h2>마이페이지</h2>
             <hr />
             <form @submit.prevent="mypageUpdate">
+                <p>회원 정보 변경을 원하시면 현재 비밀번호를 입력 후 새로운 정보를 변경해주세요.</p>
                 <table>
                     <tbody>
                         <tr>
