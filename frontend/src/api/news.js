@@ -54,5 +54,31 @@ export const newsApi = {
     // 뉴스 상세보기
     newsView(newsNo) {
         return apiClient.get(`/view/${newsNo}`);
+    },
+
+    // 좋아요 관련
+    toggleLike(newsNo) {
+        return apiClient.post(`/like/${newsNo}`);
+    },
+    getLikeStatus(newsNo) {
+        return apiClient.get(`/like/${newsNo}/status`)
+    },
+
+    // 댓글 관련
+    getComment(newsNo) {
+        return apiClient.get(`/${newsNo}/comments`)
+    },
+    createComment(newsNo, content) {
+        return apiClient.post(`/${newsNo}/comments`, { 
+            content: content 
+        })
+    },
+    updateComment(commentNo, content) {
+        return apiClient.put(`/comments/${commentNo}`, {
+            content: content
+        })
+    },
+    deleteComment(commentNo) {
+        return apiClient.delete(`/comments/${commentNo}`)
     }
 }

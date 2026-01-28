@@ -3,10 +3,15 @@ package com.newlog.backend.service.news;
 import com.newlog.backend.dto.member.ApiResponse;
 import com.newlog.backend.dto.news.NewsDto;
 import com.newlog.backend.dto.news.NewsViewRequestDto;
+import com.newlog.backend.entity.member.Member;
 import com.newlog.backend.entity.news.News;
 import com.newlog.backend.entity.news.NewsCategory;
+import com.newlog.backend.entity.news.NewsViewHistory;
+import com.newlog.backend.jwt.SecurityUtil;
+import com.newlog.backend.repository.member.MemberRepository;
 import com.newlog.backend.repository.news.NaverNewsApiResponse;
 import com.newlog.backend.repository.news.NewsRepository;
+import com.newlog.backend.repository.news.NewsViewHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -33,6 +38,8 @@ import java.util.List;
 public class NewsService {
 
     private final NewsRepository newsRepository;
+    private final NewsViewHistoryRepository newsViewHistoryRepository;
+    private final MemberRepository memberRepository;
     private final RestTemplate restTemplate;
 
     @Value("${naver.api.client-id}")
@@ -269,8 +276,30 @@ public class NewsService {
     }
 
     /* 뉴스 상세페이지 */
+    @Transactional
     public NewsDto newsView(Long newsNo) {
-        News news = newsRepository.findByNewsNo(newsNo).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 뉴스 넘버입니다."));
+        News news = newsRepository.findByNewsNo(newsNo).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 뉴스입니다."));
+
+        String memberId = SecurityUtil.getCurrentMemberId();
+
+        if (memberId != null) {
+            Member member = memberRepository.findByMemberId(memberId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+
+            Long memberNo = member.getMemberNo();
+
+            boolean isFirstView = !newsViewHistoryRepository.existsByNews_NewsNoAndMember_MemberNo(newsNo, memberNo);
+
+            if (isFirstView) {
+                NewsViewHistory history = NewsViewHistory.builder()
+                        .news(news)
+                        .member(member)
+                        .build();
+                newsViewHistoryRepository.save(history);
+
+                news.incrementViewCount();
+            }
+
+        }
 
         return convertToDto(news);
     }
