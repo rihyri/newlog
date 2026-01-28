@@ -38,7 +38,7 @@
                     >
                         <router-link :to="{ name: 'NewsView', params: {id: news.newsNo}}">
                             <div class="news_cate">
-                                    <h3 class="news_title">{{ truncateText(news.title, 25) }}</h3>
+                                    <h3 class="news_title">{{ truncateText(news.title, 23) }}</h3>
                                 <div class="cate-name" v-if="news.categoryDisplayName">
                                     {{ news.categoryDisplayName }}
                                 </div>

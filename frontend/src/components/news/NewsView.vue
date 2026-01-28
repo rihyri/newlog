@@ -1,78 +1,78 @@
 <template>
-    <div class="title_wrap">
+    <div class="detail_wrap">
         <div class="news_detail">
-            <h2>뉴스 상세보기</h2>
-
             <div v-if="loading">로딩 중...</div>
             <div v-else-if="error">{{ error }}</div>
-            <div v-else>
-                <h3>{{ news.title }}</h3>
-                <div v-if="news.categoryDisplayName">
-                    <span class="category">{{ news.categoryDisplayName }}</span>
+            <div class="news_content" v-else>
+                <div class="news_title">
+                    <div v-if="news.categoryDisplayName">
+                        <span class="category">{{ news.categoryDisplayName }}</span>
+                    </div>
+                    <h3>{{ news.title }}</h3>
                 </div>
-                <span>발행일: {{ formatDate(news.pubDate) }}</span>
-                <div v-html="news.description"></div>
-                
+                <hr />
+                <span class="news_date">발행일: {{ formatDate(news.pubDate) }}</span>
+                <div class="news_description" v-html="news.description"></div>
+                <p class="notice_txt"><i class="fa-brands fa-diaspora"></i>&nbsp;하단 원문 보기 버튼을 클릭하시면 원본 기사를 확인하실 수 있습니다.</p>
+                <div class="link_wrap">
+                    <a :href="news.originalLink" class="original_link">원문 보기<span><i class="fa-solid fa-right-long"></i></span></a>
+                </div>
                 <div class="news_status">
                     <div>
                         <span>👁️</span>
+                        <span>조회수</span>
                         <span>{{ news.viewCount }}</span>
                     </div>
-                    <button
-                        @click="handleLike"
-                        :class="{ liked : isLiked }"
-                    >
-                        <span>{{ isLiked ? '❤️' : '🤍' }}</span>
-                        <span>{{ news.likeCount }}</span>
-                    </button>
+                    
                     <div>
+                        <button
+                            @click="handleLike"
+                            :class="{ liked : isLiked }"
+                        >
+                            <span>{{ isLiked ? '❤️' : '🤍' }}</span>
+                            <span>좋아요</span>
+                            <span>{{ news.likeCount }}</span>
+                        </button>
+                    </div>
+                    
+                    <div>    
                         <span>💬</span>
+                        <span>댓글</span>
                         <span>{{ comments.length }}</span>
                     </div>
                 </div>
-
-                <a :href="news.originalLink">원문 보기</a>
             </div>
 
-            <div>
+            <hr class="comment_hr" />
+            <div class="comment_wrap">
                 <h4>댓글 {{ comments.length }}개</h4>
-
-                <div class="comment_form">
-                    <textarea
-                        v-model="newComment"
-                        placeholder="뉴스에 대한 의견을 달아주세요."
-                        rows="5"
-                        @keyup.ctrl.enter="submitComment"
-                    ></textarea>
-                    <button
-                        @click="submitComment"
-                        :disabled="!newComment.trim()"
-                    >댓글 작성</button>
-                </div>
 
                 <div class="comment_list">
                     <div
+                        class="comment_cont"
                         v-for="comment in comments" :key="comment.commentNo"
                     >
                         <div class="comment_header">
-                            <span>{{ comment.memberName }}</span>
+                            <span>{{ comment.nickname }}</span>
                             <span>{{ formatDateTime(comment.createdAt) }}</span>
                         </div>
 
-                        <div v-if="editingCommentNo === comment.commentNo">
+                        <div class="comment_edit" v-if="editingCommentNo === comment.commentNo">
                             <textarea
                                 v-model="editingContent"
                                 rows="5"
                             ></textarea>
-                            <div>
+                            <div class="edit_button">
                                 <button @click="saveComment(comment.commentNo)">저장</button>
                                 <button @click="cancelEdit">취소</button>
                             </div>
                         </div>
 
+                        
+
                         <div v-else>
-                            <p>{{ comment.content }}</p> 
-                            <div v-if="comment.isAuthor">
+                             <p class="comment_content">{{ comment.content }}</p>
+                            <div class="comment_btn" v-if="comment.isAuthor">
                                 <button
                                     @click="startEdit(comment)"
                                 >
@@ -90,6 +90,19 @@
                     <div v-if="comments.length === 0">
                         첫 댓글을 완성해보세요!
                     </div>
+                </div>
+
+                <div class="comment_form">
+                    <textarea
+                        v-model="newComment"
+                        placeholder="뉴스에 대한 의견을 달아주세요."
+                        rows="5"
+                        @keyup.ctrl.enter="submitComment"
+                    ></textarea>
+                    <button
+                        @click="submitComment"
+                        :disabled="!newComment.trim()"
+                    >댓글 작성</button>
                 </div>
             </div>
         </div>
@@ -212,7 +225,7 @@ export default {
                 const response = await newsApi.createComment(newsNo, this.newComment);
 
                 if (response.data && response.data.data) {
-                    this.comments.unshift(response.data.data);
+                    this.comments.push(response.data.data);
                     this.newComment = '';
                     alert('댓글이 작성되었습니다.');
                 }
