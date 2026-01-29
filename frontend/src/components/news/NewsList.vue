@@ -16,14 +16,10 @@
                     {{ category }}
                 </button>
             </div>
+            
+            <LoadingVar v-if="loading" />
 
-            <div v-if="loading" class="loading list_text">
-                뉴스를 불러오는 중...
-            </div>
-
-            <div v-else-if="error" class="error list_text">
-                {{ error }}
-            </div>
+            <ErrorVar v-else-if="error" />
             
             <div v-else class="list_text">
                 <div v-if="newsList.length === 0" class="no-data">
@@ -58,8 +54,8 @@
         </div>
 
         <!-- paging -->
-        <div class="paging_wrap">
-            <div class="pagination" v-if="totalPages > 0">
+        <div class="pagination" v-if="totalPages > 0">
+            <div class="paging_wrap">
                 <button
                     @click="loadPage(currentPage - 1)"
                     :disabled="currentPage === 0"
@@ -80,6 +76,7 @@
     import { newsApi } from '@/api/news';
     import { ref, onMounted } from 'vue';
     import { truncateText } from '@/utils/stringUtil';
+import ErrorVar from '../loading/ErrorVar.vue';
 
     export default {
         name: 'NewsList',

@@ -678,17 +678,23 @@ footer .notice_menu ul li a {
 }
 
 .pagination {
-   width: 10vw;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   width: 100%;
 }
 
-.list_wrap .paging_wrap {
+.paging_wrap {
    background-color: #eee;
    padding: 3vw 0;
    display: flex;
    justify-content: center;
+   align-items: center;
+   width: 100%;
+}
+
+.pagination span {
+   margin: 0 1vw;
 }
 
 .pagination button {
@@ -916,4 +922,65 @@ footer .notice_menu ul li a {
 
 .news_detail .comment_edit button:hover {
    background-color: #0F4C75;
+}
+
+.loading_wrap, .error_wrap {
+   display: flex;
+   flex-flow: column;
+   align-items: center;
+   justify-content: center;
+   height: 65vh;
+   background: #f5f9ff;
+   margin: 2vw 0;
+}
+
+.loading_wrap .loading_img {
+   width: 8vw;;
+   margin-bottom: 2vw;
+}
+
+.dot-loader {
+   display: flex;
+   gap: 10px;
+}
+
+.dot {
+   width: 20px;
+   height: 20px;
+   background: #3b82f6;
+   border-radius: 50%;
+   animation: bounce 0.6s infinite alternate;
+}
+
+.dot:nth-child(2) {
+   animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+   animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+   from {
+   transform: translateY(0);
+   opacity: 0.4;
+   }
+   to {
+   transform: translateY(-10px);
+   opacity: 1;
+   }
+}
+
+.error_wrap .error_img {
+   width: 8vw;
+}
+
+.error_wrap .error_txt {
+   text-align: center;
+   margin-top: 2vw;
+   font-size: 0.9rem;
+}
+
+.error_wrap .error_txt p {
+   margin-bottom: 0.5vw;
 }
