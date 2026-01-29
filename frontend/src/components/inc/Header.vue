@@ -13,6 +13,7 @@
                 <ul>
                     <li class="sub-li"><a href="/">메인화면</a></li>
                     <li class="sub-li"><a href="/news-list">뉴스</a></li>
+                    <li class="sub-li"><a href="/custom-news/list">맞춤뉴스</a></li>
                     
                     <!-- 로그인 -->
                     <li class="member-li" v-if="isLoggedIn">

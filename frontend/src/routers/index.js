@@ -9,6 +9,7 @@ import Pwd_result from '@/components/member/search/Pwd_result.vue';
 import Mypage from '@/components/member/mypage/Mypage.vue';
 import NewsList from '@/components/news/NewsList.vue';
 import NewsView from '@/components/news/NewsView.vue';
+import CustomList from '@/components/custom-news/CustomList.vue';
 
 const routes = [
     {
@@ -63,6 +64,12 @@ const routes = [
         name: 'NewsView',
         component: NewsView,
         meata: { requiresAuth : true }
+    },
+    {
+        path: '/custom-news/list',
+        name: 'CustomList',
+        component: CustomList,
+        meta: { requiresAuth : true }
     }
 ];
 

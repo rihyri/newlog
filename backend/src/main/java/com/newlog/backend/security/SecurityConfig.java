@@ -43,8 +43,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/member/check-email/**").permitAll()
                         .requestMatchers("/api/member/search-id").permitAll()
                         .requestMatchers("/api/member/search-pwd").permitAll()
-                        .requestMatchers("/api/member/mypage", "/api/member/mypage-update", "/api/news/**")
-                        .authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),

@@ -65,7 +65,7 @@ header a {
 header ul {
    display: flex;
    justify-content: space-between;
-   width: 30vw;
+   width: 35vw;
 }
 
 header .sub_menu {

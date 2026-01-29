@@ -100,9 +100,6 @@ public class NewsService {
         LocalDateTime cacheTime = LocalDateTime.now().minusMinutes(CACHE_MINUTES);
         long recentNewsCount = newsRepository.countRecentAllNews(cacheTime);
 
-        System.out.println("recentNewsCount : " + recentNewsCount);
-        System.out.println("size: " + size);
-
         if (recentNewsCount < size) {
             log.info("캐시된 전체 뉴스 부족, API 호출");
             NaverNewsApiResponse apiResponse = fetchNewsFromNaver("뉴스", 30, 1, "date");

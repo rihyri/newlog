@@ -8,6 +8,7 @@ import com.newlog.backend.repository.member.MemberRepository;
 import com.newlog.backend.repository.news.NewsLikeRepository;
 import com.newlog.backend.repository.news.NewsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,9 @@ public class NewsLikeService {
         Long memberNo = member.getMemberNo();
 
         News news = newsRepository.findById(newsNo).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 뉴스입니다."));
+
+        // 좋아요 캐시 삭제
+        evictPreferredCategoryCache(memberNo);
 
         // 이미 '좋아요'한 경우 -> 좋아요 취소
         Optional<NewsLike> existingLike = newsLikeRepository.findByNews_NewsNoAndMember_MemberNo(newsNo, memberNo);
@@ -68,5 +72,9 @@ public class NewsLikeService {
         }
 
         return newsLikeRepository.existsByNews_NewsNoAndMember_MemberNo(newsNo, member.getMemberNo());
+    }
+
+    @CacheEvict(value = "preferredCategory", key = "#memberNo")
+    public void evictPreferredCategoryCache(Long memberNo) {
     }
 }

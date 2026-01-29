@@ -76,7 +76,6 @@
     import { newsApi } from '@/api/news';
     import { ref, onMounted } from 'vue';
     import { truncateText } from '@/utils/stringUtil';
-import ErrorVar from '../loading/ErrorVar.vue';
 
     export default {
         name: 'NewsList',
